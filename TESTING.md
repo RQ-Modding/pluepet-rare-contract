@@ -14,7 +14,7 @@ Finds' number.
   `yes`). With a contract running: "Pluepet is already tracking down one of your Rare Items."
 - **The purchase scene**, over the shop, at the next frames after the purchase: Pluepet's lines, then
   the game's choice menu with one row per lost item (each row's id from its label, the item's name;
-  each row's comment its group and level). No Return row: an item must be chosen. Past 19 lost items, a "More..." row turns the page.
+  each row's comment its group and level). No Return row: an item must be chosen. Past 19 lost items, a "More..." row turns the page. A long page goes up to fit on the screen (loader 2.56.0): page 1 runs from about y 132 to 759.
 - **The receipt** in the vault: its text names the item and the quests left. DISCARD, SELL and
   DONATE refuse it.
 - **The delivery**, on the hub once 3 quests are counted: Rance's Room, Pluepet's line, the game's

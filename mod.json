@@ -3,7 +3,7 @@
   "id": "pluepet-rare-contract",
   "name": "Pluepet Rare Contract",
   "author": "Moru Zerinho6",
-  "version": "1.0.0",
-  "loader": "2.50.0",
+  "version": "1.0.1",
+  "loader": "2.56.0",
   "priority": 0
 }

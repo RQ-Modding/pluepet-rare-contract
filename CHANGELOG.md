@@ -3,6 +3,12 @@
 Each section is a version of the mod, the `version` in `mod.json`. The release workflow copies the
 section of a tagged version into the release notes.
 
+## 1.0.1
+
+- Needs loader 2.56.0. With 13 or more lost Rare Items, the choice of the item ran past the bottom of
+  the screen, and its last rows and "More..." could not be clicked. Loader 2.56.0 moves a menu that
+  long up until it fits.
+
 ## 1.0.0
 
 First version.
