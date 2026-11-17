@@ -1,5 +1,7 @@
 -- Pluepet Rare Contract. Frostbuy's Items and Other rack sells "Pluepet Rare Finds" for 50,000 Gold
--- while one of the player's Rare Items is lost (sold, donated or discarded, and not owned now). After
+-- while one of the player's Rare Items is lost (sold, donated or discarded, and not owned now), or a
+-- character's own gear that a chest brings back (Rick's By Road and armor, Kouhime's Poison Dango,
+-- Crane's Stealth Suit: the character recruited and none owned). After
 -- the purchase Pluepet asks which one to find; 3 successful exploration quests later, back in town, it
 -- comes to Rance's Room with the item, made as a chest makes it (the level the game gives it on its
 -- return), and the game autosaves. One contract at a time; it is never in a chest.
@@ -58,8 +60,21 @@ local RARE = {
   { no = 168, fa = 218, group = "B" },
   { no = 157, fa = 217, group = "B" },
 }
+-- A character's own gear that a chest also brings back (レアアイテムを選ぶ, the same walk as group A):
+-- the character comes with it, and a chest makes another copy while the character is in the roster
+-- and none is owned. No counter: lost is the chest's own rule. A chest's copy has no level, but in
+-- the 2nd and 3rd worlds an item of kind rank 11, 21 or 31 gets the world's mark (Ｉ生成／データ１),
+-- which the copy the character came with never has (made with キャラ生成時): world_mark.
+local GEAR = {
+  { no = 2, chara = 23, owner = "Crane" },                        -- Stealth Suit, rank 41
+  { no = 118, chara = 20, owner = "Kouhime", world_mark = true }, -- Poison Dango, rank 11
+  { no = 131, chara = 93, owner = "Rick", world_mark = true },    -- By Road, rank 31
+  { no = 34, chara = 93, owner = "Rick" },                        -- Leazas Red General Armor, rank 30
+}
+
 local RARE_OF = {}
 for _, r in ipairs(RARE) do RARE_OF[r.no] = r end
+for _, g in ipairs(GEAR) do RARE_OF[g.no] = g end
 
 -- A character's line once per item, in each save: face and line, in order.
 local EGGS = {
@@ -85,8 +100,22 @@ local function name_of(no)
 end
 
 local function counter(r)
+  if not r.fa then return 0 end
   local ok, n = pcall(rq.ain.global, "FA", r.fa)
   return ok and math.type(n) == "integer" and n or 0
+end
+
+local function recruited(chara)
+  local ok, yes = pcall(rq.chara.is_recruited, chara)
+  return ok and yes == true
+end
+
+-- The world's mark a chest's copy of this gear gets now (2 or 3), or nil.
+local function world_mark(g)
+  if not g.world_mark then return nil end
+  local ok, w = pcall(rq.world.current)
+  if ok and math.type(w) == "integer" and w >= 2 then return w end
+  return nil
 end
 
 -- The level a copy made now has (Ｉ生成 reads the counter for these items, at most 9).
@@ -109,7 +138,8 @@ local function owned(no)
   return owned_set()[no] == true
 end
 
--- The lost rare items, in the Trivia page's order: { no, name, comment }.
+-- The lost rare items, in the Trivia page's order, then the characters' gear in the chest's order:
+-- { no, name, comment }.
 local function lost_list()
   local have = owned_set()
   local out = {}
@@ -120,6 +150,17 @@ local function lost_list()
         no = r.no,
         name = name_of(r.no),
         comment = ("Rare Item %s%s.\nIt comes back at %s."):format(r.group, who, CIRCLED[level_of(r)]),
+      }
+    end
+  end
+  for _, g in ipairs(GEAR) do
+    if recruited(g.chara) and not have[g.no] then
+      local w = world_mark(g)
+      out[#out + 1] = {
+        no = g.no,
+        name = name_of(g.no),
+        comment = w and ("%s's gear.\nIt comes back at %s, this world's mark."):format(g.owner, CIRCLED[w])
+          or ("%s's gear.\nIt comes back as it was."):format(g.owner),
       }
     end
   end
@@ -391,10 +432,17 @@ return {
   PRICE = PRICE,
   QUESTS = QUESTS,
   RARE = RARE,
+  GEAR = GEAR,
   EGGS = EGGS,
   lost_list = lost_list,
   owned = owned,
-  level_of = function(no) return RARE_OF[no] and level_of(RARE_OF[no]) or nil end,
+  -- The level a copy made now has: the counter's, 0 for a character's gear.
+  level_of = function(no)
+    local r = RARE_OF[no]
+    if not r then return nil end
+    return r.fa and level_of(r) or 0
+  end,
+  world_mark = function(no) return RARE_OF[no] and world_mark(RARE_OF[no]) or nil end,
   receipt_text = receipt_text,
   stock = stock,
   -- The rq.quests.on_end callback, for a test that counts quests without playing them.

@@ -3,6 +3,14 @@
 Each section is a version of the mod, the `version` in `mod.json`. The release workflow copies the
 section of a tagged version into the release notes.
 
+## 1.1.0
+
+- A character's own gear that a chest also brings back, though the Trivia page does not list it:
+  Rick's By Road and Leazas Red General Armor, Kouhime's Poison Dango and Crane's Stealth Suit. It is
+  lost while its owner is recruited and no copy is owned, the chest's own rule (there is no counter).
+  Its row in the choice says whose it is and how it comes back: as it was, or with the world's mark
+  in the 2nd and 3rd worlds (the By Road and the Poison Dango).
+
 ## 1.0.1
 
 - Needs loader 2.56.0. With 13 or more lost Rare Items, the choice of the item ran past the bottom of

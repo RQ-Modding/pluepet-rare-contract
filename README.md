@@ -8,6 +8,11 @@ Lost a Rare Item? The Pluepet Company finds it again, for a price.
   Rare Items is lost: sold, donated or discarded, and not owned now. These are the 25 items of the
   Trivia page "Rare Items", groups A and B (Chaos the Darksword can never be lost). An item you never
   found is not lost.
+- **A character's own gear** that a chest also brings back, though the Trivia page does not list it:
+  Rick's By Road and Leazas Red General Armor, Kouhime's Poison Dango and Crane's Stealth Suit. It
+  is lost while its owner is in your roster and you own no copy, as the game's chests count it. It
+  has no level; in the 2nd and 3rd worlds the By Road and the Poison Dango come back with the
+  world's mark (② or ③), which the copy the character came with never has.
 - **One contract at a time.** Rare Finds is not on sale while a contract runs or while nothing is
   lost, and it never comes from a chest. Buying it with nothing lost is refused with "You currently
   have no lost Rare Items."
@@ -42,7 +47,8 @@ release zip into the game's `mods` folder, so that you have `mods/pluepet-rare-c
 ## How it works
 
 - Lost: the game's own counter of each Rare Item's losses (`FA`, raised when one is sold, donated or
-  discarded), at least 1, and none owned (`rq.items()`).
+  discarded), at least 1, and none owned (`rq.items()`). A character's gear: the chest's own rule,
+  the owner recruited (`rq.chara.is_recruited`) and none owned.
 - Frostbuy: `rq.shop.on_stock`, `rq.shop.on_can_buy` (the refusal) and `rq.shop.on_buy`; the item:
   `rq.item.define` with `keep`.
 - The scenes: `rq.scene.start`, `s.choice`, `s.seen`, `s.item` (the game's jingle and item card).
