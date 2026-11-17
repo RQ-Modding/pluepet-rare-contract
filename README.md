@@ -55,6 +55,12 @@ release zip into the game's `mods` folder, so that you have `mods/pluepet-rare-c
 - The quests: `rq.quests.on_end`; the delivery: the game's `Ｉ生成` (as a chest makes the item) and
   `rq.saves.autosave`.
 
+## Credits
+
+The contract's icon, `icons/contract.webp`, is AliceSoft's art: CG 6385 of Rance Quest Magnum,
+edited for this mod. All rights to it are reserved by AliceSoft; it is not covered by this mod's MIT
+license.
+
 ## License
 
 MIT, see [LICENSE](LICENSE).
