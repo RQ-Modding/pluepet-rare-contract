@@ -2,6 +2,20 @@
 
 Lost a Rare Item? The Pluepet Company finds it again, for a price.
 
+## Showcase
+
+### Pluepet Rare Contract Item in Frostbuy
+
+<img width="476" height="165" alt="image" src="https://github.com/user-attachments/assets/b2b40849-afb9-4f1a-ab49-b5c7a86f1644" />
+
+### Pluepet asking which item you want to find
+
+<img width="1273" height="507" alt="image" src="https://github.com/user-attachments/assets/e9c58e8c-24d4-4f69-a013-b7050e5c768f" />
+
+### The Rare Contract in your Vault keeping track
+
+<img width="477" height="156" alt="image" src="https://github.com/user-attachments/assets/0ef38333-bc1f-443d-813c-11cc18f3e17f" />
+
 ## What it changes
 
 - **Pluepet Rare Finds**, on Frostbuy's Items and Other rack for **50,000 Gold**, while one of your
