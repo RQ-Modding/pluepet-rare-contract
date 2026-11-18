@@ -59,9 +59,9 @@ counter (`rq.ain.set_global("FA", 246, 1)` for the Omikuji Box) and removing eve
 hide an owned copy by setting its place to 0: that is a free slot, and the next item the game makes
 (`rq.item.info` makes one) can take it over. Work on a copy of the save.
 
-## Test Lab
+## Tested in the game
 
-`rare-contract` (with this mod installed): the lost list from the counters, the stock rule, the
+The Test Lab's scenario `rare-contract` (with this mod installed): the lost list from the counters, the stock rule, the
 refusal (the game's drag and `rq.item.buy`), the receipt that cannot go, the purchase scene with its
 lines once, the quests counted, the delivery's item, level and autosave, an item found before the
 delivery, and the characters' gear: lost by the chest's rule, the world's mark in the 2nd world, a
